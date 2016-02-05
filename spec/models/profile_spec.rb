@@ -9,6 +9,10 @@ describe Profile, type: :model do
     expect(FactoryGirl.build(:profile, firstname: nil)).to_not be_valid
   end
 
+  it 'is invalid without a lastname' do
+    expect(FactoryGirl.build(:profile, lastname: nil)).to_not be_valid
+  end
+
   it 'is invalid with duplicate email case insensitive check' do
     FactoryGirl.create(:profile, email: 'jared@jaredjennings.org')
     expect(FactoryGirl.build(:profile, email: 'jared@jaredjennings.org')).to_not be_valid

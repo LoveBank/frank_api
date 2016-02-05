@@ -8,4 +8,9 @@ RSpec.describe LoveBank, type: :model do
   it 'contains a note' do
     expect(FactoryGirl.build(:love_bank).note).to_not be_nil
   end
+
+  it 'requires a rating' do
+    expect(FactoryGirl.build(:love_bank, :rating => nil).valid?).to be false
+  end
+
 end

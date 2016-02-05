@@ -9,4 +9,8 @@ RSpec.describe Mood, type: :model do
     expect(FactoryGirl.build(:mood).note).to_not be_nil
   end
 
+  it 'requires a rating' do
+    expect(FactoryGirl.build(:mood, :rating => nil).valid?).to be false
+  end
+
 end

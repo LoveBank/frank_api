@@ -19,6 +19,14 @@ RSpec.describe type: :model do
       end
 
       it { expect(subject).to have_attributes(:note => be_a(String) ) }
+
+      it 'requires a note' do
+        expect(FactoryGirl.build(:entry, :note => nil).valid?).to be false
+      end
+
+      it 'requires a rating' do
+        expect(FactoryGirl.build(:entry, :rating => nil).valid?).to be false
+      end
     end
 
     context 'rates' do

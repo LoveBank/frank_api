@@ -1,0 +1,14 @@
+{
+  "name": "frank_api",
+  "scripts": {
+  },
+  "env": {
+    "ENC_EMAIL_KEY": {
+      "required": true
+    }
+  },
+  "addons": [
+    "papertrail",
+    "heroku-postgresql"
+  ]
+}

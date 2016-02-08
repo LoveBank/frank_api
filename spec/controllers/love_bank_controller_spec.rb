@@ -25,7 +25,7 @@ RSpec.describe LoveBankController, type: :controller do
     let(:profile) { FactoryGirl.create(:profile) }
 
     it 'should create love bank entry' do
-      @request.headers['Content-Type'] = 'application/vnd.api+json'
+      @request.headers['Content-Type'] = JSONAPI::MEDIA_TYPE
       json = {:'data' => {:type => 'love_banks',
                           :relationships => {
                               profile:

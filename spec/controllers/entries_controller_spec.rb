@@ -29,7 +29,7 @@ RSpec.describe EntriesController, type: :controller do
     describe 'requests' do
 
       it 'should create a entry' do
-        @request.headers['Content-Type'] = 'application/vnd.api+json'
+        @request.headers['Content-Type'] = JSONAPI::MEDIA_TYPE
         json =
             { "data":
                   { "type": "entries",

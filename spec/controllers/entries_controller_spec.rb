@@ -36,7 +36,7 @@ RSpec.describe EntriesController, type: :controller do
                     "relationships": {
                         "profile":
                             { "data":
-                                  { "type": "profiles", "id": "1" }
+                                  { "type": "profiles", "id": profile.id }
                             }
                     },
                     "attributes": {
@@ -48,10 +48,9 @@ RSpec.describe EntriesController, type: :controller do
                   }
             }
         post :create, json
-        expect(Entry.count).to eq(1)
         expect(response.status).to eq(201)
-        expect(Entry.first.received).to be true
-        expect(Entry.first.note).to match(note)
+        expect(JSON.parse(response.body)['data'].is_a?(Array))
+        expect(JSON.parse(response.body)['data']['attributes']['received']).to eql true
       end
 
     end

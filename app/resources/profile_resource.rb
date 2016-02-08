@@ -7,7 +7,16 @@ class ProfileResource < JSONAPI::Resource
   has_many :love_banks
   relationship :family, to: :one
 
-  filter :email
+  filter :email, apply: ->(records, value, options) {
+    if value.is_a?(Array)
+      value.each do |val|
+        records = records.where('lower(email) = ?', val.downcase)
+      end
+      records
+    else
+      records.where('lower(email) = ?', value.downcase)
+    end
+  }
 
   def full_name
     "#{@model.firstname} #{@model.lastname}"

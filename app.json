@@ -1,10 +1,21 @@
 {
   "name": "frank_api",
   "scripts": {
+    "postdeploy": "bundle exec rake db:migrate"
   },
   "env": {
-    "ENC_EMAIL_KEY": {
-      "required": true
+    "RAILS_ENV": "production",
+    "COOKIE_SECRET": {
+      "description": "This gets generated",
+      "generator": "secret"
+    },
+    "SECRET_KEY_BASE": {
+      "description": "This gets generated",
+      "generator": "secret"
+    },
+    "SECRET_TOKEN": {
+      "description": "This gets generated",
+      "generator": "secret"
     }
   },
   "addons": [

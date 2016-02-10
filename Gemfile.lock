@@ -1,5 +1,5 @@
 PATH
-  remote: ../frank
+  remote: lib/frank
   specs:
     frank (0.0.1)
       rails (~> 4.2.5)

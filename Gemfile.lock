@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:LoveBank/frank.git
+  remote: git://github.com/LoveBank/frank.git
   revision: 0b9ee1d09cf2aa4d383039743e4140b587a705af
   specs:
     frank (0.0.1)

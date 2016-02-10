@@ -23,7 +23,7 @@ RSpec.describe MoodsController, type: :controller do
 
   describe 'requests' do
     let(:note) { Faker::Lorem.paragraph }
-    let(:profile) { FactoryGirl.create(:profile) }
+    let(:profile) { FactoryGirl.create(:frank_profile) }
 
     it 'should create a mood' do
       @request.headers['Content-Type'] = JSONAPI::MEDIA_TYPE
@@ -39,9 +39,9 @@ RSpec.describe MoodsController, type: :controller do
       }
       post :create, json
       expect(response.status).to eq(201)
-      expect(Mood.count).to eq(1)
-      expect(Mood.first.note).to match(note)
-      expect(Profile.first.moods.count).to eq(1)
+      expect(Frank::Mood.count).to eq(1)
+      expect(Frank::Mood.first.note).to match(note)
+      expect(Frank::Profile.first.moods.count).to eq(1)
     end
   end
 end

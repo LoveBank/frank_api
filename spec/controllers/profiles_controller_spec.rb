@@ -51,12 +51,11 @@ RSpec.describe ProfilesController, type: :controller do
                 }
         }
         post :create, json
-        p response.body
-        expect(Profile.count).to eq(1)
         expect(response.status).to eq(201)
-        expect(Profile.first.firstname).to match(firstname)
-        expect(Profile.first.lastname).to match(lastname)
-        expect(Profile.first.email).to match(email)
+        expect(Frank::Profile.count).to eq(1)
+        expect(Frank::Profile.first.firstname).to match(firstname)
+        expect(Frank::Profile.first.lastname).to match(lastname)
+        expect(Frank::Profile.first.email).to match(email)
       end
 
     end
@@ -74,8 +73,8 @@ RSpec.describe ProfilesController, type: :controller do
                 }
         }
         post :create, json
-        expect(Profile.count).to eq(0)
         expect(response.status).to eq(422)
+        expect(Frank::Profile.count).to eq(0)
         expect(response.body).to include("firstname - can't be blank")
       end
 
@@ -91,8 +90,8 @@ RSpec.describe ProfilesController, type: :controller do
                 }
         }
         post :create, json
-        expect(Profile.count).to eq(0)
         expect(response.status).to eq(422)
+        expect(Frank::Profile.count).to eq(0)
         expect(response.body).to include("lastname - can't be blank")
       end
 
@@ -108,12 +107,10 @@ RSpec.describe ProfilesController, type: :controller do
                 }
         }
         post :create, json
-        expect(Profile.count).to eq(0)
         expect(response.status).to eq(422)
+        expect(Frank::Profile.count).to eq(0)
         expect(JSON.parse(response.body)['errors'].length).to eq(1)
       end
-
     end
-
   end
 end

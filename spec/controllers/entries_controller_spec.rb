@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe EntriesController, type: :controller do
   let(:note) { Faker::Lorem.paragraph }
-  subject(:profile) { FactoryGirl.create(:profile) }
+  let(:profile) { FactoryGirl.create(:frank_profile) }
 
   context 'JSON' do
     context 'ROUTES' do
@@ -36,7 +36,7 @@ RSpec.describe EntriesController, type: :controller do
                     "relationships": {
                         "profile":
                             { "data":
-                                  { "type": "profiles", "id": "1" }
+                                  { "type": "profiles", "id": profile.id }
                             }
                     },
                     "attributes": {
@@ -48,10 +48,9 @@ RSpec.describe EntriesController, type: :controller do
                   }
             }
         post :create, json
-        expect(Entry.count).to eq(1)
         expect(response.status).to eq(201)
-        expect(Entry.first.received).to be true
-        expect(Entry.first.note).to match(note)
+        expect(Frank::Entry.first.received).to be true
+        expect(Frank::Entry.first.note).to match(note)
       end
 
     end

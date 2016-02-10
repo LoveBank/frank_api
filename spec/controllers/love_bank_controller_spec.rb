@@ -22,7 +22,7 @@ RSpec.describe LoveBankController, type: :controller do
 
   describe 'requests' do
     let(:note) { Faker::Lorem.paragraph }
-    let(:profile) { FactoryGirl.create(:profile) }
+    let(:profile) { FactoryGirl.create(:frank_profile) }
 
     it 'should create love bank entry' do
       @request.headers['Content-Type'] = JSONAPI::MEDIA_TYPE
@@ -38,9 +38,9 @@ RSpec.describe LoveBankController, type: :controller do
       }
       post :create, json
       expect(response.status).to eq(201)
-      expect(LoveBank.count).to eq(1)
-      expect(LoveBank.first.note).to match(note)
-      expect(Profile.first.love_banks.count).to eq(1)
+      expect(Frank::LoveBank.count).to eq(1)
+      expect(Frank::LoveBank.first.note).to match(note)
+      expect(Frank::Profile.first.love_banks.count).to eq(1)
     end
   end
 end

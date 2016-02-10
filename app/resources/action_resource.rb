@@ -1,4 +1,5 @@
 class ActionResource < JSONAPI::Resource
+  model_name 'Frank::Action'
   immutable
   attributes :name, :language, :help
 

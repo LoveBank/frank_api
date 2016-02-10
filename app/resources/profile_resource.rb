@@ -1,4 +1,5 @@
 class ProfileResource < JSONAPI::Resource
+  model_name 'Frank::Profile'
   attributes :firstname, :lastname, :full_name, :email
   # key_type :uuid
 

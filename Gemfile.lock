@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/LoveBank/frank.git
+  revision: 0b9ee1d09cf2aa4d383039743e4140b587a705af
+  specs:
+    frank (0.0.1)
+      rails (~> 4.2.5)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -197,6 +204,7 @@ DEPENDENCIES
   capybara
   factory_girl_rails
   faker
+  frank!
   guard-rspec
   jsonapi-resources
   newrelic_rpm
@@ -204,7 +212,7 @@ DEPENDENCIES
   pg
   pry-rails
   rack-cors
-  rails
+  rails (~> 4.2.5)
   rails-api
   rails_12factor
   rails_stdout_logging

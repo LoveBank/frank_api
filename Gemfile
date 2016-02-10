@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.3.0'
-gem 'rails'
+gem 'frank', :git => 'git://github.com/LoveBank/frank.git'
+gem 'rails', "~> 4.2.5"
 
 gem 'rails-api'
 

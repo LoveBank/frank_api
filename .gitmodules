@@ -1,3 +1,0 @@
-[submodule "lib/frank"]
-	path = lib/frank
-	url = git@github.com:LoveBank/frank.git

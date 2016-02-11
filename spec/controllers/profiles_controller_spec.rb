@@ -15,7 +15,6 @@ RSpec.describe ProfilesController, type: :controller do
       end
     end
     describe 'view' do
-
       it 'profile' do
         expect(:get => '/profiles/1').to route_to(
                                            :controller => 'profiles',
@@ -23,7 +22,6 @@ RSpec.describe ProfilesController, type: :controller do
                                            :id => '1'
                                        )
       end
-
     end
     describe 'view profile entries' do
       it 'is valid' do
@@ -37,41 +35,11 @@ RSpec.describe ProfilesController, type: :controller do
     end
   end
 
-  context 'when params[:email] == email' do
-    let(:user) { FactoryGirl.create(:profile) }
-
-    it 'filters results by email with empty results' do
-      @request.headers['Content-Type'] = JSONAPI::MEDIA_TYPE
-      get :index, {filter: {email: 'does not exist'}}
-      expect(response.status).to eq(200)
-      expect(JSON.parse(response.body)['data'].is_a?(Array))
-      expect(JSON.parse(response.body)['data'].size).to eql 0
-    end
-
-    it 'filters results by email finds a match' do
-      @request.headers['Content-Type'] = JSONAPI::MEDIA_TYPE
-      get :index, {filter: {email: user.email}}
-      expect(response.status).to eq(200)
-      expect(JSON.parse(response.body)['data'].is_a?(Array))
-      expect(JSON.parse(response.body)['data'].size).to eql 1
-    end
-
-    it 'filters results by email finds a match case insensitive' do
-      @request.headers['Content-Type'] = JSONAPI::MEDIA_TYPE
-      get :index, {filter: {email: user.email.capitalize}}
-      expect(response.status).to eq(200)
-      expect(JSON.parse(response.body)['data'].is_a?(Array))
-      expect(JSON.parse(response.body)['data'].size).to eql 1
-    end
-
-  end
-
   context 'JSON requests' do
 
     describe 'profiles' do
-
       it 'should be success' do
-        @request.headers['Content-Type'] = JSONAPI::MEDIA_TYPE
+        @request.headers['Content-Type'] = 'application/vnd.api+json'
         json = {
                 :data => {
                     :type => 'profiles',
@@ -83,43 +51,19 @@ RSpec.describe ProfilesController, type: :controller do
                 }
         }
         post :create, json
-
-        expect(Profile.count).to eq(1)
         expect(response.status).to eq(201)
-        expect(Profile.first.firstname).to match(firstname)
-        expect(Profile.first.lastname).to match(lastname)
-        expect(Profile.first.email).to match(email)
+        expect(Frank::Profile.count).to eq(1)
+        expect(Frank::Profile.first.firstname).to match(firstname)
+        expect(Frank::Profile.first.lastname).to match(lastname)
+        expect(Frank::Profile.first.email).to match(email)
       end
 
-    end
-
-    describe 'existing profiles' do
-      let(:user) {FactoryGirl.create(:profile)}
-
-      it 'case insensitive match on creation' do
-        user.save!
-
-        @request.headers['Content-Type'] = JSONAPI::MEDIA_TYPE
-        json = {
-            :data => {
-                :type => 'profiles',
-                attributes: {
-                    :firstname => user.firstname,
-                    :lastname => user.lastname,
-                    :email => user.email.capitalize
-                }
-            }
-        }
-        post :create, json
-        expect(Profile.count).to eq(1)
-        expect(response.status).to eq(422)
-      end
     end
 
     describe 'invalid requests' do
       it 'should be missing the first name' do
-        @request.headers['Content-Type'] = JSONAPI::MEDIA_TYPE
-        json = {:format => JSONAPI::MEDIA_TYPE,
+        @request.headers['Content-Type'] = 'application/vnd.api+json'
+        json = {:format => 'application/vnd.api+json',
                 :data => {
                     :type => 'profiles',
                     attributes: {
@@ -129,14 +73,14 @@ RSpec.describe ProfilesController, type: :controller do
                 }
         }
         post :create, json
-        expect(Profile.count).to eq(0)
         expect(response.status).to eq(422)
+        expect(Frank::Profile.count).to eq(0)
         expect(response.body).to include("firstname - can't be blank")
       end
 
       it 'should be missing the last name' do
-        @request.headers['Content-Type'] = JSONAPI::MEDIA_TYPE
-        json = {:format => JSONAPI::MEDIA_TYPE,
+        @request.headers['Content-Type'] = 'application/vnd.api+json'
+        json = {:format => 'application/vnd.api+json',
                 :data => {
                     :type => 'profiles',
                     attributes: {
@@ -146,14 +90,14 @@ RSpec.describe ProfilesController, type: :controller do
                 }
         }
         post :create, json
-        expect(Profile.count).to eq(0)
         expect(response.status).to eq(422)
+        expect(Frank::Profile.count).to eq(0)
         expect(response.body).to include("lastname - can't be blank")
       end
 
       it 'should be missing email' do
-        @request.headers['Content-Type'] = JSONAPI::MEDIA_TYPE
-        json = {:format => JSONAPI::MEDIA_TYPE,
+        @request.headers['Content-Type'] = 'application/vnd.api+json'
+        json = {:format => 'application/vnd.api+json',
                 :data => {
                     :type => 'profiles',
                     attributes: {
@@ -163,12 +107,10 @@ RSpec.describe ProfilesController, type: :controller do
                 }
         }
         post :create, json
-        expect(Profile.count).to eq(0)
         expect(response.status).to eq(422)
+        expect(Frank::Profile.count).to eq(0)
         expect(JSON.parse(response.body)['errors'].length).to eq(1)
       end
-
     end
-
   end
 end

@@ -17,7 +17,13 @@ ActiveRecord::Schema.define(version: 20160210142929) do
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "comments", force: :cascade do |t|
+  create_table "frank_appointments", force: :cascade do |t|
+    t.datetime "start_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "frank_comments", force: :cascade do |t|
     t.text     "body"
     t.integer  "profile_id"
     t.integer  "entry_id"
@@ -25,14 +31,8 @@ ActiveRecord::Schema.define(version: 20160210142929) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "comments", ["entry_id"], name: "index_comments_on_entry_id", using: :btree
-  add_index "comments", ["profile_id"], name: "index_comments_on_profile_id", using: :btree
-
-  create_table "frank_appointments", force: :cascade do |t|
-    t.datetime "start_time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+  add_index "frank_comments", ["entry_id"], name: "index_frank_comments_on_entry_id", using: :btree
+  add_index "frank_comments", ["profile_id"], name: "index_frank_comments_on_profile_id", using: :btree
 
   create_table "frank_entries", force: :cascade do |t|
     t.boolean  "received"
@@ -75,6 +75,16 @@ ActiveRecord::Schema.define(version: 20160210142929) do
 
   add_index "frank_love_banks", ["profile_id"], name: "index_frank_love_banks_on_profile_id", using: :btree
 
+  create_table "frank_moods", force: :cascade do |t|
+    t.integer  "rating"
+    t.text     "note"
+    t.integer  "profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "frank_moods", ["profile_id"], name: "index_frank_moods_on_profile_id", using: :btree
+
   create_table "frank_profiles", force: :cascade do |t|
     t.string   "firstname"
     t.string   "lastname"
@@ -88,20 +98,10 @@ ActiveRecord::Schema.define(version: 20160210142929) do
   add_index "frank_profiles", ["email"], name: "index_frank_profiles_on_email", using: :btree
   add_index "frank_profiles", ["family_id"], name: "index_frank_profiles_on_family_id", using: :btree
 
-  create_table "moods", force: :cascade do |t|
-    t.integer  "rating"
-    t.text     "note"
-    t.integer  "profile_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "moods", ["profile_id"], name: "index_moods_on_profile_id", using: :btree
-
-  add_foreign_key "comments", "frank_entries", column: "entry_id"
-  add_foreign_key "comments", "frank_profiles", column: "profile_id"
+  add_foreign_key "frank_comments", "frank_entries", column: "entry_id"
+  add_foreign_key "frank_comments", "frank_profiles", column: "profile_id"
   add_foreign_key "frank_entries", "frank_profiles", column: "profile_id"
   add_foreign_key "frank_love_banks", "frank_profiles", column: "profile_id"
+  add_foreign_key "frank_moods", "frank_profiles", column: "profile_id"
   add_foreign_key "frank_profiles", "frank_families", column: "family_id"
-  add_foreign_key "moods", "frank_profiles", column: "profile_id"
 end

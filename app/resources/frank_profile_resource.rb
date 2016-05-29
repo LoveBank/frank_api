@@ -5,7 +5,6 @@ class FrankProfileResource < JSONAPI::Resource
   after_create :slack_notify
 
   has_many :frank_entries
-  has_many :frank_links
   # has_many :frank_comments
   # has_many :frank_love_banks
   # relationship :frank_family, to: :one

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe EntriesController, type: :controller do
+RSpec.describe FrankEntriesController, type: :controller do
   let(:note) { Faker::Lorem.paragraph }
   let(:profile) { FactoryGirl.create(:frank_profile) }
 
@@ -8,8 +8,8 @@ RSpec.describe EntriesController, type: :controller do
     context 'ROUTES' do
       describe 'index' do
         it 'is valid' do
-          expect(:get => '/entries').to route_to(
-                                             :controller => 'entries',
+          expect(:get => '/frank-entries').to route_to(
+                                             :controller => 'frank_entries',
                                              :action => 'index'
                                          )
         end
@@ -17,8 +17,8 @@ RSpec.describe EntriesController, type: :controller do
 
       describe 'create entries' do
         it 'is valid' do
-          expect(:post => 'entries').to route_to(
-                                             :controller => 'entries',
+          expect(:post => 'frank-entries').to route_to(
+                                             :controller => 'frank_entries',
                                              :action => 'create',
                                          )
         end
@@ -32,11 +32,11 @@ RSpec.describe EntriesController, type: :controller do
         @request.headers['Content-Type'] = JSONAPI::MEDIA_TYPE
         json =
             { "data":
-                  { "type": "entries",
+                  { "type": "frank_entries",
                     "relationships": {
-                        "profile":
+                        "frank-profile":
                             { "data":
-                                  { "type": "profiles", "id": profile.id }
+                                  { "type": "frank_profiles", "id": profile.id }
                             }
                     },
                     "attributes": {

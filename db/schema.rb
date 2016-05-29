@@ -19,14 +19,14 @@ ActiveRecord::Schema.define(version: 20160216185526) do
 
   create_table "frank_comments", force: :cascade do |t|
     t.text     "body"
-    t.integer  "profile_id"
-    t.integer  "entry_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "frank_profile_id"
+    t.integer  "frank_entry_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
-  add_index "frank_comments", ["entry_id"], name: "index_frank_comments_on_entry_id", using: :btree
-  add_index "frank_comments", ["profile_id"], name: "index_frank_comments_on_profile_id", using: :btree
+  add_index "frank_comments", ["frank_entry_id"], name: "index_frank_comments_on_frank_entry_id", using: :btree
+  add_index "frank_comments", ["frank_profile_id"], name: "index_frank_comments_on_frank_profile_id", using: :btree
 
   create_table "frank_entries", force: :cascade do |t|
     t.boolean  "received"
@@ -36,14 +36,14 @@ ActiveRecord::Schema.define(version: 20160216185526) do
     t.datetime "occurred_on"
     t.integer  "linked_profile_id"
     t.integer  "integer"
-    t.integer  "profile_id"
+    t.integer  "frank_profile_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end
 
+  add_index "frank_entries", ["frank_profile_id"], name: "index_frank_entries_on_frank_profile_id", using: :btree
   add_index "frank_entries", ["integer"], name: "index_frank_entries_on_integer", using: :btree
   add_index "frank_entries", ["linked_profile_id"], name: "index_frank_entries_on_linked_profile_id", using: :btree
-  add_index "frank_entries", ["profile_id"], name: "index_frank_entries_on_profile_id", using: :btree
 
   create_table "frank_families", force: :cascade do |t|
     t.string   "name"
@@ -56,41 +56,41 @@ ActiveRecord::Schema.define(version: 20160216185526) do
   create_table "frank_love_banks", force: :cascade do |t|
     t.integer  "rating"
     t.text     "note"
-    t.integer  "profile_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "frank_profile_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
-  add_index "frank_love_banks", ["profile_id"], name: "index_frank_love_banks_on_profile_id", using: :btree
+  add_index "frank_love_banks", ["frank_profile_id"], name: "index_frank_love_banks_on_frank_profile_id", using: :btree
 
   create_table "frank_moods", force: :cascade do |t|
     t.integer  "rating"
     t.text     "note"
-    t.integer  "profile_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "frank_profile_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
-  add_index "frank_moods", ["profile_id"], name: "index_frank_moods_on_profile_id", using: :btree
+  add_index "frank_moods", ["frank_profile_id"], name: "index_frank_moods_on_frank_profile_id", using: :btree
 
   create_table "frank_profiles", force: :cascade do |t|
     t.string   "firstname"
     t.string   "lastname"
     t.string   "email"
     t.string   "phone"
-    t.integer  "family_id"
+    t.integer  "frank_family_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.integer  "last_daily_report_id"
   end
 
   add_index "frank_profiles", ["email"], name: "index_frank_profiles_on_email", using: :btree
-  add_index "frank_profiles", ["family_id"], name: "index_frank_profiles_on_family_id", using: :btree
+  add_index "frank_profiles", ["frank_family_id"], name: "index_frank_profiles_on_frank_family_id", using: :btree
 
-  add_foreign_key "frank_comments", "frank_entries", column: "entry_id"
-  add_foreign_key "frank_comments", "frank_profiles", column: "profile_id"
-  add_foreign_key "frank_entries", "frank_profiles", column: "profile_id"
-  add_foreign_key "frank_love_banks", "frank_profiles", column: "profile_id"
-  add_foreign_key "frank_moods", "frank_profiles", column: "profile_id"
-  add_foreign_key "frank_profiles", "frank_families", column: "family_id"
+  add_foreign_key "frank_comments", "frank_entries"
+  add_foreign_key "frank_comments", "frank_profiles"
+  add_foreign_key "frank_entries", "frank_profiles"
+  add_foreign_key "frank_love_banks", "frank_profiles"
+  add_foreign_key "frank_moods", "frank_profiles"
+  add_foreign_key "frank_profiles", "frank_families"
 end

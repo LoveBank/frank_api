@@ -1,0 +1,2 @@
+class FrankActionsController < ApplicationController
+end

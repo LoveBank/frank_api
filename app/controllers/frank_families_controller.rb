@@ -1,0 +1,2 @@
+class FrankFamiliesController < ApplicationController
+end

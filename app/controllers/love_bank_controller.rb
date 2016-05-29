@@ -1,2 +1,0 @@
-class LoveBankController < ApplicationController
-end

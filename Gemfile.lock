@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/LoveBank/frank.git
-  revision: 85d0e011140442cfcbdf6de09303e36e519999f3
+  revision: 0945c50b6f28989bb135d527a58b0791dd0de54e
   specs:
     frank (0.0.4)
       rails (~> 4.2.5)
@@ -215,7 +215,6 @@ DEPENDENCIES
   pg
   pry-rails
   rack-cors
-  rails (~> 4.2.5)
   rails-api
   rails_12factor
   rails_stdout_logging

@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 ruby '2.3.0'
 gem 'frank', :git => 'git://github.com/LoveBank/frank.git'
-gem 'rails', "~> 4.2.5"
+# gem 'frank', :path => '../frank'
+# gem 'rails', "~> 4.2.5"
 gem 'awesome_print'
 gem 'rails-api'
 

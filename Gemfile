@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.3.0'
 gem 'frank', :git => 'git://github.com/LoveBank/frank.git'
 gem 'rails', "~> 4.2.5"
-
+gem 'awesome_print'
 gem 'rails-api'
 
 gem 'newrelic_rpm'
@@ -18,13 +18,14 @@ gem 'rack-cors', :require => 'rack/cors'
 
 gem 'pg'
 
+gem 'slack-notifier'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'awesome_print'
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'factory_girl_rails'

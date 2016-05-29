@@ -6,6 +6,8 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+GC::Profiler.enable
+
 module FrankApi
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -24,7 +26,6 @@ module FrankApi
     config.active_record.raise_in_transactional_callbacks = true
 
     config.api_only = true
-
 
     # for CORS issues
     config.middleware.insert_before 0, "Rack::Cors" do

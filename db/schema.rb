@@ -11,17 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160210142929) do
+ActiveRecord::Schema.define(version: 20160216185526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
-
-  create_table "frank_appointments", force: :cascade do |t|
-    t.datetime "start_time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "frank_comments", force: :cascade do |t|
     t.text     "body"
@@ -50,12 +44,6 @@ ActiveRecord::Schema.define(version: 20160210142929) do
   add_index "frank_entries", ["integer"], name: "index_frank_entries_on_integer", using: :btree
   add_index "frank_entries", ["linked_profile_id"], name: "index_frank_entries_on_linked_profile_id", using: :btree
   add_index "frank_entries", ["profile_id"], name: "index_frank_entries_on_profile_id", using: :btree
-
-  create_table "frank_events", force: :cascade do |t|
-    t.datetime "start_time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "frank_families", force: :cascade do |t|
     t.string   "name"
@@ -91,8 +79,9 @@ ActiveRecord::Schema.define(version: 20160210142929) do
     t.string   "email"
     t.string   "phone"
     t.integer  "family_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "last_daily_report_id"
   end
 
   add_index "frank_profiles", ["email"], name: "index_frank_profiles_on_email", using: :btree

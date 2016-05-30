@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160216185526) do
+ActiveRecord::Schema.define(version: 20160315022944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,15 @@ ActiveRecord::Schema.define(version: 20160216185526) do
 
   add_index "frank_families", ["name"], name: "index_frank_families_on_name", using: :btree
 
+  create_table "frank_links", force: :cascade do |t|
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "frank_profile_id"
+    t.integer  "to_profile_id"
+  end
+
+  add_index "frank_links", ["frank_profile_id"], name: "index_frank_links_on_frank_profile_id", using: :btree
+
   create_table "frank_love_banks", force: :cascade do |t|
     t.integer  "rating"
     t.text     "note"
@@ -90,6 +99,7 @@ ActiveRecord::Schema.define(version: 20160216185526) do
   add_foreign_key "frank_comments", "frank_entries"
   add_foreign_key "frank_comments", "frank_profiles"
   add_foreign_key "frank_entries", "frank_profiles"
+  add_foreign_key "frank_links", "frank_profiles"
   add_foreign_key "frank_love_banks", "frank_profiles"
   add_foreign_key "frank_moods", "frank_profiles"
   add_foreign_key "frank_profiles", "frank_families"

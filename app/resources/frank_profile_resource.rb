@@ -28,6 +28,7 @@ class FrankProfileResource < JSONAPI::Resource
   def linked_email=(new_email)
     @linked_profile = Frank::Profile.find_or_create_by(:email => new_email.downcase)
     @model.profiles << @linked_profile
+    Rails.logger.info "Linking profile #{@model.email} to #{@linked_profile.email}"
   end
 
   def self.fields

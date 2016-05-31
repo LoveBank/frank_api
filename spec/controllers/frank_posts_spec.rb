@@ -43,12 +43,32 @@ module Frank
                           "title": "Example Title 1",
                           "body": Faker::Lorem.paragraph
                       }
-                    }
+                    },
+                'token': 'jkx312'
               }
           post :create, json
-          p response.body
           expect(response.status).to eq(201)
           expect(Frank::Post.first.body).to_not be nil
+        end
+
+        it 'should not create a post InvalidResource' do
+          @request.headers['Content-Type'] = JSONAPI::MEDIA_TYPE
+          json =
+              { "data":
+                    { "type": "posts",
+                      "relationships": {
+                          "frank-profile":
+                              { "data":
+                                    { "type": "frank-profiles", "id": profile.id }
+                              }
+                      },
+                      "attributes": {
+                          "title": "Example Title 1",
+                          "body": Faker::Lorem.paragraph
+                      }
+                    }
+              }
+          expect{post :create, json}.to raise_error(JSONAPI::Exceptions::InvalidResource)
         end
 
       end

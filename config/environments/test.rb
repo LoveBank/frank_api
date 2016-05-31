@@ -39,4 +39,10 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # TODO: Implement authorization and authentication
+  # this is basic static security for posting blog entries.
+  # later this might be tied to user authentication and proper authorization.
+  config.x.blog.token  = 'jkx312'
+
 end

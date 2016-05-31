@@ -1,16 +1,17 @@
 GIT
+  remote: git://github.com/LoveBank/frank.git
+  revision: ac6d9114a464cf1610ee3767a387a7ae382ed6fb
+  specs:
+    frank (0.0.5)
+      rails (~> 4.2.5)
+
+GIT
   remote: git://github.com/cerebris/jsonapi-resources.git
   revision: 23195aab744dc080b499ea2c0d01a89feac9194b
   specs:
     jsonapi-resources (0.7.0)
       concurrent-ruby
       rails (>= 4.0)
-
-PATH
-  remote: ../frank
-  specs:
-    frank (0.0.5)
-      rails (~> 4.2.5)
 
 GEM
   remote: https://rubygems.org/

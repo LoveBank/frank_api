@@ -1,9 +1,17 @@
 GIT
   remote: git://github.com/LoveBank/frank.git
-  revision: 0945c50b6f28989bb135d527a58b0791dd0de54e
+  revision: ac6d9114a464cf1610ee3767a387a7ae382ed6fb
   specs:
-    frank (0.0.4)
+    frank (0.0.5)
       rails (~> 4.2.5)
+
+GIT
+  remote: git://github.com/cerebris/jsonapi-resources.git
+  revision: 23195aab744dc080b499ea2c0d01a89feac9194b
+  specs:
+    jsonapi-resources (0.7.0)
+      concurrent-ruby
+      rails (>= 4.0)
 
 GEM
   remote: https://rubygems.org/
@@ -85,8 +93,6 @@ GEM
       rspec (>= 2.99.0, < 4.0)
     i18n (0.7.0)
     json (1.8.3)
-    jsonapi-resources (0.7.0)
-      rails (>= 4.0)
     listen (3.0.5)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
@@ -209,7 +215,7 @@ DEPENDENCIES
   faker
   frank!
   guard-rspec
-  jsonapi-resources
+  jsonapi-resources!
   newrelic_rpm
   passenger
   pg

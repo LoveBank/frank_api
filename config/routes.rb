@@ -12,4 +12,6 @@ Rails.application.routes.draw do
     jsonapi_relationships
   end
 
+  jsonapi_resources :posts
+
 end

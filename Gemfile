@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.3.0'
-gem 'frank', :git => 'git://github.com/LoveBank/frank.git'
-# gem 'frank', :path => '../frank'
+# gem 'frank', :git => 'git://github.com/LoveBank/frank.git'
+gem 'frank', :path => '../frank'
 # gem 'rails', "~> 4.2.5"
 gem 'awesome_print'
 gem 'rails-api'
@@ -13,7 +13,7 @@ gem 'bcrypt'
 
 gem 'passenger'
 
-gem 'jsonapi-resources'
+gem 'jsonapi-resources', github: 'cerebris/jsonapi-resources'
 
 gem 'rack-cors', :require => 'rack/cors'
 

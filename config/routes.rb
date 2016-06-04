@@ -13,5 +13,6 @@ Rails.application.routes.draw do
   end
 
   jsonapi_resources :posts
+  jsonapi_resources :insights
 
 end

@@ -76,4 +76,10 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # TODO: Implement authorization and authentication
+  # this is basic static security for posting blog entries.
+  # later this might be tied to user authentication and proper authorization.
+  config.x.blog.token  = ENV['BLOG_TOKEN']
+
 end

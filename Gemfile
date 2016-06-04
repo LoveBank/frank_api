@@ -13,7 +13,7 @@ gem 'bcrypt'
 
 gem 'passenger'
 
-gem 'jsonapi-resources'
+gem 'jsonapi-resources', github: 'cerebris/jsonapi-resources'
 
 gem 'rack-cors', :require => 'rack/cors'
 

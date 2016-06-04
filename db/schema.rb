@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160315022944) do
+ActiveRecord::Schema.define(version: 20160604180423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,15 @@ ActiveRecord::Schema.define(version: 20160315022944) do
 
   add_index "frank_families", ["name"], name: "index_frank_families_on_name", using: :btree
 
+  create_table "frank_insights", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.string   "love_language"
+    t.string   "category"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
   create_table "frank_links", force: :cascade do |t|
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
@@ -82,6 +91,16 @@ ActiveRecord::Schema.define(version: 20160315022944) do
 
   add_index "frank_moods", ["frank_profile_id"], name: "index_frank_moods_on_frank_profile_id", using: :btree
 
+  create_table "frank_posts", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "frank_profile_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "frank_posts", ["frank_profile_id"], name: "index_frank_posts_on_frank_profile_id", using: :btree
+
   create_table "frank_profiles", force: :cascade do |t|
     t.string   "firstname"
     t.string   "lastname"
@@ -102,5 +121,6 @@ ActiveRecord::Schema.define(version: 20160315022944) do
   add_foreign_key "frank_links", "frank_profiles"
   add_foreign_key "frank_love_banks", "frank_profiles"
   add_foreign_key "frank_moods", "frank_profiles"
+  add_foreign_key "frank_posts", "frank_profiles"
   add_foreign_key "frank_profiles", "frank_families"
 end

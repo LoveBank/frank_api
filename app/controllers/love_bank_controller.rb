@@ -1,0 +1,2 @@
+class LoveBankController < ApplicationController
+end

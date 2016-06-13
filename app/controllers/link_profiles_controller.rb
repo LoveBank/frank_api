@@ -4,14 +4,14 @@ class LinkProfilesController < ApplicationController
   # GET /link_profiles/1
   # GET /link_profiles/1.json
   def show
-    render json: @frank_link
+    render json: @link
   end
 
   # POST /link_profiles
   # POST /link_profiles.json
   def create
-    owning_profile = Frank::Profile.find_by_email(params[:link[:email]])
-    to_profile = Frank::Profile.find_by_email(params[:link[:to_email]])
+    owning_profile = Profile.find_by_email(params[:link[:email]])
+    to_profile = Profile.find_by_email(params[:link[:to_email]])
 
     owning_profile << to_profile
 
@@ -25,7 +25,7 @@ class LinkProfilesController < ApplicationController
   # PATCH/PUT /link_profiles/1
   # PATCH/PUT /link_profiles/1.json
   def update
-    @link = Frank::Link.find(params[:id])
+    @link = Link.find(params[:id])
 
     if @link.update(link_profile_params)
       head :no_content
@@ -45,10 +45,10 @@ class LinkProfilesController < ApplicationController
   private
 
     def set_link_profile
-      @link = Frank::Link.find(params[:id])
+      @link = Link.find(params[:id])
     end
 
     def link_profile_params
-      params[:frank_link]
+      params[:link]
     end
 end

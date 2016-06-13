@@ -1,2 +1,0 @@
-class FrankMoodsController < ApplicationController
-end

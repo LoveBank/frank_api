@@ -1,2 +1,0 @@
-class FrankCommentsController < ApplicationController
-end

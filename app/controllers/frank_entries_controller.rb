@@ -1,2 +1,0 @@
-class FrankEntriesController < ApplicationController
-end

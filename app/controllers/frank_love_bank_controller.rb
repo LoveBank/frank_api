@@ -1,2 +1,0 @@
-class FrankLoveBankController < ApplicationController
-end

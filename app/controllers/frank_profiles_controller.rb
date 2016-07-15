@@ -1,2 +1,0 @@
-class FrankProfilesController < ApplicationController
-end

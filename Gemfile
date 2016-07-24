@@ -24,6 +24,8 @@ gem 'postmark-rails', '~> 0.12.0'
 
 gem 'groupdate', '~> 2.5'
 
+gem 'uglifier', '~> 3.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

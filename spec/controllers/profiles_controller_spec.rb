@@ -36,7 +36,6 @@ RSpec.describe ProfilesController, type: :controller do
   end
 
   context 'JSON requests' do
-
     describe 'profiles' do
 
       it 'create does not require first name' do

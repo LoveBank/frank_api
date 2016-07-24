@@ -33,10 +33,9 @@ RSpec.describe Entry, type: :model do
 
     context 'dates' do
       let(:occurred) { Time.zone.now.yesterday }
-      subject { FactoryGirl.create(:entry) }
+      subject { FactoryGirl.create(:entry, :occurred_on => occurred) }
 
       it 'occurred yesterday' do
-        subject.occurred_on = occurred
         expect(subject.occurred_on.to_i).to be == occurred.to_i
       end
 

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Profile, type: :model do
   it 'has a valid factory' do
-    expect(FactoryGirl.create(:profile)).to be_valid
+    expect(FactoryGirl.build_stubbed(:profile)).to be_valid
   end
 
   it 'is invalid with duplicate email case insensitive check' do
@@ -23,17 +23,17 @@ RSpec.describe Profile, type: :model do
     let(:user) { FactoryGirl.build_stubbed(:profile) }
 
     it 'partner has entries' do
-      FactoryGirl.create_list(:entry, 2, :linked_profile_id => user.id, :private => false, :received => true)
+      FactoryGirl.create_list(:entry, 2, :linked_profile_id => user.id, :private => false, :received => true, :created_at => 0.day.ago, :updated_at => 0.day.ago)
       expect(user.partners_entries.count).to eql 2
     end
 
     it 'does not show private entries' do
-      FactoryGirl.create_list(:entry, 2, :linked_profile_id => user.id, :private => true, :received => true)
+      FactoryGirl.create_list(:entry, 2, :linked_profile_id => user.id, :private => true, :received => true, :created_at => 0.day.ago, :updated_at => 0.day.ago)
       expect(user.partners_entries.count).to eql 0
     end
 
     it 'partner has entries sync last report' do
-      FactoryGirl.create_list(:entry, 2, :linked_profile_id => user.id, :private => false, :received => true)
+      FactoryGirl.create_list(:entry, 2, :linked_profile_id => user.id, :private => false, :received => true, :created_at => 0.day.ago, :updated_at => 0.day.ago)
       user.last_daily_report_id = Entry.first.id
       expect(user.partners_entries.count).to eql 1
     end

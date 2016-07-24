@@ -1,9 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe EntriesController, type: :controller do
-  let(:note) { Faker::Lorem.paragraph }
-  let(:profile) { FactoryGirl.create(:profile) }
-
   context 'JSON' do
     context 'ROUTES' do
       describe 'index' do
@@ -24,36 +21,38 @@ RSpec.describe EntriesController, type: :controller do
         end
       end
     end
+  end
 
-
+  context 'post' do
     describe 'requests' do
+      let(:profile) { FactoryGirl.create(:profile) }
+      let(:paragraph) { Faker::Lorem.paragraph }
 
       it 'should create a entry' do
         @request.headers['Content-Type'] = JSONAPI::MEDIA_TYPE
         json =
             { "data":
-                  { "type": "entries",
+                  { "type": 'entries',
                     "relationships": {
                         "profile":
                             { "data":
-                                  { "type": "profiles", "id": profile.id }
+                                  { "type": 'profiles', 'id': profile.id }
                             }
                     },
                     "attributes": {
                         "received": true,
                         "private": false,
-                        "note": note,
-                        "rating": 1
+                        "note": paragraph,
+                        "rating": 3
                     }
                   }
             }
         post :create, json
         expect(response.status).to eq(201)
         expect(Entry.first.received).to be true
-        expect(Entry.first.note).to match(note)
+        expect(Entry.first.note).to match(paragraph)
       end
 
     end
-
   end
 end

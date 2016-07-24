@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  let(:profile) { FactoryGirl.create(:profile) }
+  let(:profile) { FactoryGirl.build_stubbed(:profile) }
   subject {Post.new(:title => 'Example Title', :body => Faker::Lorem.paragraph)}
 
   it 'is a valid Post instance' do

@@ -28,7 +28,7 @@ module FrankApi
     config.api_only = true
 
     # for CORS issues
-    config.middleware.insert_before 0, "Rack::Cors" do
+    config.middleware.insert_after Rails::Rack::Logger, Rack::Cors, :logger => Rails.logger do
       allow do
         origins '*'
         resource '*', :headers => :any, :methods => [:get, :post, :options]

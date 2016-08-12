@@ -30,7 +30,7 @@ module FrankApi
     # for CORS issues
     config.middleware.insert_before 0, "Rack::Cors", :debug => true, :logger => (-> {Rails.logger }) do
       allow do
-        origins 'localhost:4000'
+        origins 'https://*.treasury.love'
 
         resource '*',
                  :headers => :any,

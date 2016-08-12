@@ -5,7 +5,6 @@
 #
 # Generated March 11, 2015
 #
-# This configuration file is custom generated for SoldierUp Heroku
 
 
 # Here are the settings that are common to all environments
@@ -180,6 +179,8 @@ common: &default_settings
 
 # NOTE if your application has other named environments, you should
 # provide newrelic configuration settings for these environments here.
+
+license_key: 4d10ff962ac48b1fda4e7a45537136853c1041d2
 
 development:
   <<: *default_settings

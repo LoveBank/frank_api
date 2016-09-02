@@ -3,4 +3,8 @@ class EntryResource < JSONAPI::Resource
 
   has_one :profile
   has_many :comments
+
+  def self.default_sort
+    [{field: 'occurred_on', direction: :desc}]
+  end
 end

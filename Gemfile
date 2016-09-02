@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.3.0'
 gem 'awesome_print'
-gem 'rails-api'
+gem 'rails', '~> 4.2', '>= 4.2.7.1'
 
 gem 'newrelic_rpm'
 
@@ -10,7 +10,7 @@ gem 'bcrypt'
 
 gem 'passenger'
 
-gem 'jsonapi-resources'
+gem 'jsonapi-resources', '~> 0.8.0.beta2'
 
 gem 'rack-cors', :require => 'rack/cors'
 

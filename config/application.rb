@@ -28,10 +28,15 @@ module FrankApi
     config.api_only = true
 
     # for CORS issues
-    config.middleware.insert_after Rails::Rack::Logger, Rack::Cors, :logger => Rails.logger do
+    config.middleware.insert_before 0, "Rack::Cors", :debug => true, :logger => (-> {Rails.logger }) do
       allow do
         origins '*'
-        resource '*', :headers => :any, :methods => [:get, :post, :options]
+
+        resource '*',
+                 :headers => :any,
+                 :methods => [:get, :post, :delete, :put, :options, :head, :patch],
+                 :expose  => ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+                 :max_age => 0
       end
     end
 
